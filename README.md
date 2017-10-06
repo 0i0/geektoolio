@@ -42,6 +42,8 @@ Navigate to geektoolio folder
 
 	node app.js
 
+If you enjoyed please consider tipping me @
+
 Bitcoin 142jKB3e9uC8sSmssKtp5NtWScarZdYpuH
 
 Ethereum ​0x8423b2cA48Bd9a734B4FE27A4E78f64e12131B79​
