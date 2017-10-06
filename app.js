@@ -52,11 +52,13 @@ app.get('/mem', function (req, res) {
                           }))
 })
 app.get('/net', function (req, res) {
-  si.networkStats('en1', function(data) {
+  si.networkInterfaceDefault(function(interface){
+    si.networkStats(interface, function(data) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify({rx:Math.round(data.rx_sec/8/1024*100)/100
                           ,tx:Math.round(data.tx_sec/8/1024*100)/100
                           }))
+    })
   })
 })
 console.log('running on http://localhost:3000')
