@@ -4,7 +4,7 @@
 
 # Clone git Repo
 
-    git clone https://github.com/0i0/geektoolio.git
+    git clone https://github.com/0i0/geektoolio.git && cd geektoolio
 
 # Install from shell script
 
@@ -42,4 +42,6 @@ Navigate to geektoolio folder
 
 	node app.js
 
+Bitcoin 142jKB3e9uC8sSmssKtp5NtWScarZdYpuH
 
+Ethereum ​0x8423b2cA48Bd9a734B4FE27A4E78f64e12131B79​
