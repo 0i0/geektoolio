@@ -2,6 +2,7 @@ var child_process = require('child_process');
 var readline      = require('readline');
 var os            = require('os');
 var exec1         = child_process.exec;
+var exec0         = child_process.exec;
 const si = require('systeminformation');
 
 var express = require('express')
@@ -61,5 +62,16 @@ app.get('/net', function (req, res) {
     })
   })
 })
+app.get('/ps', function (req, res) {
+  function cb(error, stdout, stderr) {
+    str = stdout.replace(/:/g,'],[')
+    str = str.replace(/</g,'"')
+    str = '[['+str+']]'
+    res.setHeader('Content-Type', 'application/json');
+    res.send(str)
+  };
+  exec0("ps -Ao pid,%cpu,%mem,comm |sort -nrk 2 | head -n 5 | awk '{gsub(\"(.+/)\",\"\",$4);print \"<\"$4\"<\"\",\"$1\",\"$2\",\"$3\":\"}'",cb);
+})
+
 console.log('running on http://localhost:3000')
 app.listen(3000);

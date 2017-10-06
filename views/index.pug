@@ -1,21 +1,32 @@
 html
   head
     title title
+    link(rel="stylesheet" href="css/reset.css")
     link(rel="stylesheet" href="css/style.css")
   body
-    div#cpu.title CPU
+
+    div#cpu.title.h1 CPU
     div#cpu-data.stats
     div#cputemp-data.stats 0
-    div#mem.title MEM
+    div#mem.title.h1 MEM
     div#mem-data.stats
       span#memusage-data 0 
       span of 
       span#memtotal-data 0
-    div#netup.stats
-      span Up 
-      span#netup-data
-    div#netdn.stats
-      span Down 
-      span#netdn-data
+    table#net.stats
+      tr
+        td.h1 Up 
+        td#netup-data
+      tr
+        td.h1 Down 
+        td#netdn-data
+    table#ps-data.stats
+      thead
+        tr
+          td.h1(style="width:80px") Proccess
+          td.h1(style="width:45px") PID
+          td.h1(style="width:45px") Cpu
+          td.h1(style="width:45px") Mem
+      tbody#ps-tbody
     canvas#myCanvas(width=200 height=200)
     script(src="js/script.js")

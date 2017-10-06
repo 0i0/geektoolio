@@ -1,9 +1,12 @@
+
+
 body{
    font-family: Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
    font-size: 10px;
    color: #cccccc;
    /*background-color:#000000;*/
 }
+
 .title{
 	position: absolute;
 }
@@ -38,16 +41,21 @@ body{
 	text-align: right;
 }
 
-#netup{
+#net{
 	/* float: left; */
 	top: 144px;
 	left: 17px;
 	display: block;
 	width: 200px;
 }
-#netdn{
-	top: 127px;
-	left: 17px;
+
+#ps-data{
+	top: 173px;
+    left: 17px;
+}
+
+.h1{
+	color:#FFFFFF;
 }
 
 

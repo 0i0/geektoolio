@@ -20,6 +20,22 @@ function drawRing(ctx,centerX,centerY,outerRadius,width,startAngle,endAngle,prec
   ctx.fillStyle = 'hsla('+color+',100%,70%,'+alpha+')'
   ctx.fill()   
 }
+function makeTable(data,id){
+  var dictionaryData = data;
+  var table = document.getElementById(id);
+  for (var i in dictionaryData) {
+    var tr = document.createElement("tr");
+    
+    for (var j in dictionaryData[i]) {
+      var txt = document.createTextNode(dictionaryData[i][j]);
+      var td = document.createElement("td");
+      td.appendChild(txt);
+      tr.appendChild(td);
+    }
+    table.appendChild(tr);
+  } 
+}
+
 function ajax(path,cb) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function(){
@@ -52,9 +68,6 @@ function getCPUTemp(){
 function getMem(){
   ajax('/mem',function(err,data) {
       mem = JSON.parse(data)
-      console.log(mem.free)
-      console.log(mem.total-mem.free)
-      console.log(mem.total)
       var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
       var total = Math.round((mem.total)/1024/1024/1024*100)/100
       document.getElementById("mem-data").innerHTML =  used+ ' Gb of ' +total +' Gb'
@@ -69,10 +82,21 @@ function getNet(){
       setTimeout(getNet,500)
   })
 }
+function getProcesses(){
+  ajax('/ps',function(err,data) {
+      parser = new DOMParser()
+      document.getElementById("ps-tbody").innerHTML = ""
+      // table = parser.parseFromString(data, "text/xml").firstChild
+      // document.getElementById("ps-data").appendChild(table)
+      makeTable(JSON.parse(data),'ps-tbody')
+      setTimeout(getProcesses,1000)
+  })
+}
 function updateStats(){
   getCPU()
   getCPUTemp()
   getMem()
   getNet()
+  getProcesses()
 }
 updateStats()
