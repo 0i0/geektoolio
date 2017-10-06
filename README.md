@@ -1,8 +1,16 @@
 ![Screen](https://i.imgur.com/X3bfpSu.png)
 
+
+
 # Clone git Repo
 
     git clone https://github.com/0i0/geektoolio.git
+
+# Install from shell script
+
+	install_geektool.sh
+
+# Or install by yourself
 
 # Install Brew
 		

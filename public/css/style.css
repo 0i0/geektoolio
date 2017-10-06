@@ -2,6 +2,7 @@ body{
    font-family: Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
    font-size: 10px;
    color: #cccccc;
+   /*background-color:#000000;*/
 }
 .title{
 	position: absolute;
@@ -21,8 +22,9 @@ body{
 }
 
 #cputemp-data{
-	top: 70px;
-	left: 82px;
+	top: 64px;
+	left: 81px;
+	font-size: 25px;
 }
 
 #mem{
@@ -41,6 +43,7 @@ body{
 	top: 144px;
 	left: 17px;
 	display: block;
+	width: 200px;
 }
 #netdn{
 	top: 127px;

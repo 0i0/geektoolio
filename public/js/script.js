@@ -52,6 +52,9 @@ function getCPUTemp(){
 function getMem(){
   ajax('/mem',function(err,data) {
       mem = JSON.parse(data)
+      console.log(mem.free)
+      console.log(mem.total-mem.free)
+      console.log(mem.total)
       var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
       var total = Math.round((mem.total)/1024/1024/1024*100)/100
       document.getElementById("mem-data").innerHTML =  used+ ' Gb of ' +total +' Gb'
@@ -61,8 +64,8 @@ function getMem(){
 function getNet(){
   ajax('/net',function(err,data) {
       net = JSON.parse(data)
-      document.getElementById("netup-data").innerHTML = net.tx + 'Kb'
-      document.getElementById("netdn-data").innerHTML = net.rx + 'Kb'
+      document.getElementById("netup-data").innerHTML = net.tx + 'KB'
+      document.getElementById("netdn-data").innerHTML = net.rx + 'KB'
       setTimeout(getNet,500)
   })
 }
@@ -71,6 +74,5 @@ function updateStats(){
   getCPUTemp()
   getMem()
   getNet()
-
 }
 updateStats()

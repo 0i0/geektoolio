@@ -54,8 +54,8 @@ app.get('/mem', function (req, res) {
 app.get('/net', function (req, res) {
   si.networkStats('en1', function(data) {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({rx:Math.round(data.rx_sec/1024*100)/100
-                          ,tx:Math.round(data.tx_sec/1024*100)/100
+    res.send(JSON.stringify({rx:Math.round(data.rx_sec/8/1024*100)/100
+                          ,tx:Math.round(data.tx_sec/8/1024*100)/100
                           }))
   })
 })
