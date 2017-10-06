@@ -1,0 +1,50 @@
+body{
+   font-family: Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+   font-size: 10px;
+   color: #cccccc;
+}
+.title{
+	position: absolute;
+}
+.stats{
+	position: absolute;
+}
+
+#cpu{
+	top:52px;
+	left:48px;
+}
+
+#cpu-data{
+	top: 36px;
+	left: 77px;
+}
+
+#cputemp-data{
+	top: 70px;
+	left: 82px;
+}
+
+#mem{
+	top: 111px;
+	left: 17px;
+}
+
+#mem-data{
+	top: 111px;
+	left: 54px;
+	text-align: right;
+}
+
+#netup{
+	/* float: left; */
+	top: 144px;
+	left: 17px;
+	display: block;
+}
+#netdn{
+	top: 127px;
+	left: 17px;
+}
+
+

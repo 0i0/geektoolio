@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DisplayID</key>
+	<integer>69677248</integer>
+	<key>GeekletFrame</key>
+	<string>{{0, 0}, {310, 300}}</string>
+	<key>HasShadow</key>
+	<false/>
+	<key>Identifier</key>
+	<string>org.tynsoe.geeklet.web</string>
+	<key>Name</key>
+	<string>geektoolio</string>
+	<key>RelativePosition</key>
+	<integer>3</integer>
+	<key>URL</key>
+	<string>http://localhost:3000</string>
+</dict>
+</plist>
