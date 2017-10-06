@@ -10,6 +10,14 @@
 
 	install_geektool.sh
 
+# Install geekTool
+
+Download GeekTool from https://www.tynsoe.org/v2/geektool/
+
+# Open the geeklet
+
+geektoolio.glet
+
 # Or install by yourself
 
 # Install Brew
@@ -30,14 +38,8 @@ Navigate to geektoolio folder
 	
     gem install iStats
 
-# Install geekTool
-
-Download GeekTool from https://www.tynsoe.org/v2/geektool/
-
 # Run the node app
 
 	node app.js
 
-# Open the geeklet
 
-geektoolio.glet
