@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "express": ">=0.0.1",
-    "pug": ">=0.0.1"
+    "pug": ">=0.0.1",
+    "systeminformation": ">=0.0.1"
   }
 }

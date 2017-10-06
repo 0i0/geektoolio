@@ -1,8 +1,8 @@
 var child_process = require('child_process');
 var readline      = require('readline');
 var os            = require('os');
-var exec0          = child_process.exec;
-var exec1          = child_process.exec;
+var exec1         = child_process.exec;
+const si = require('systeminformation');
 
 var express = require('express')
 
@@ -51,27 +51,13 @@ app.get('/mem', function (req, res) {
                           ,free:os.freemem()
                           }))
 })
-app.get('/netdown', function (req, res) {
-  function cb(error, stdout, stderr) {
-    res.send(stdout.toString())
-  };
-  exec0(`myvar1=$(netstat -bI en1 | tail -n 1 | awk '{print $7}')
-        sleep 1
-        myvar2=$(netstat -bI en1 | tail -n 1 | awk '{print $7}')
-        subdown=$((($myvar2 - $myvar1)/1024))
-        echo "$subdown"`
-  ,cb);
-})
-app.get('/netup', function (req, res) {
-  function cb(error, stdout, stderr) {
-    res.send(stdout)
-  };
-  exec1(`myvar1=$(netstat -bI en1 | tail -n 1 | awk '{print $10}')
-        sleep 1
-        myvar2=$(netstat -bI en1 | tail -n 1 | awk '{print $10}')
-        subdown=$((($myvar2 - $myvar1)/1024))
-        echo "$subdown"`
-  ,cb);
+app.get('/net', function (req, res) {
+  si.networkStats('en1', function(data) {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify({rx:Math.round(data.rx_sec/1024*100)/100
+                          ,tx:Math.round(data.tx_sec/1024*100)/100
+                          }))
+  })
 })
 console.log('running on http://localhost:3000')
 app.listen(3000);

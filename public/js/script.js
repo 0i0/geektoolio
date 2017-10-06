@@ -50,32 +50,27 @@ function getCPUTemp(){
   })
 }
 function getMem(){
-ajax('/mem',function(err,data) {
-    mem = JSON.parse(data)
-    var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
-    var total = Math.round((mem.total)/1024/1024/1024*100)/100
-    document.getElementById("mem-data").innerHTML =  used+ ' Gb of ' +total +' Gb'
-    setTimeout(getMem,1000)
-})
+  ajax('/mem',function(err,data) {
+      mem = JSON.parse(data)
+      var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
+      var total = Math.round((mem.total)/1024/1024/1024*100)/100
+      document.getElementById("mem-data").innerHTML =  used+ ' Gb of ' +total +' Gb'
+      setTimeout(getMem,1000)
+  })
 }
-function getNetUp(){
-ajax('/netup',function(err,data) {
-    document.getElementById("netup-data").innerHTML = data + 'Kb'
-    setTimeout(getNetUp,500)
-})
-}
-function getNetDown(){
-ajax('/netdown',function(err,data) {
-    document.getElementById("netdn-data").innerHTML = data + 'Kb'
-    setTimeout(getNetDown,500)
-})
+function getNet(){
+  ajax('/net',function(err,data) {
+      net = JSON.parse(data)
+      document.getElementById("netup-data").innerHTML = net.tx + 'Kb'
+      document.getElementById("netdn-data").innerHTML = net.rx + 'Kb'
+      setTimeout(getNet,500)
+  })
 }
 function updateStats(){
   getCPU()
   getCPUTemp()
   getMem()
-  getNetUp()
-  getNetDown()
+  getNet()
 
 }
 updateStats()
