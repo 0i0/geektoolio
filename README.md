@@ -1,36 +1,35 @@
-#clone git Repo
+![Screen](https://i.imgur.com/X3bfpSu.png)
+
+# Clone git Repo
 
     git clone https://github.com/0i0/geektoolio.git
 
-#Install Brew
+# Install Brew
 		
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-#Install nodejs
+# Install nodejs
 
     brew install nodejs
 
-#Install Dependencies for node app
+# Install Dependencies for node app
 
-Navigate to geektoolio
+Navigate to geektoolio folder
 
     npm install
 
-#Install iStats (for your cpu tempature)
+# Install iStats (for your cpu tempature)
 	
     gem install iStats
 
-#Install geekTool
+# Install geekTool
 
 Download GeekTool from https://www.tynsoe.org/v2/geektool/
 
-#Run the node app
+# Run the node app
 
-		node app.js
+	node app.js
 
-#Open the geeklet
+# Open the geeklet
 
 geektoolio.glet
-
-
-
