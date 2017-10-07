@@ -199,8 +199,25 @@ window.onload = function() {
                         callback: function(value, index, values) {
                             return '';
                         }
+                    },
+                    gridLines : {
+                      drawBorder: false,
+                      display : false
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return '';
+                        }
+                    },
+                    gridLines : {
+                      drawBorder: false,
+                      display : false
                     }
                 }]
+
             }
         }
     });
@@ -233,6 +250,22 @@ window.onload = function() {
                         callback: function(value, index, values) {
                             return '';
                         }
+                    },
+                    gridLines : {
+                      drawBorder: false,
+                      display : false
+                    }
+                }],
+                xAxes: [{
+                    ticks: {
+                        // Include a dollar sign in the ticks
+                        callback: function(value, index, values) {
+                            return '';
+                        }
+                    },
+                    gridLines : {
+                      drawBorder: false,
+                      display : false
                     }
                 }]
             }
