@@ -1,10 +1,3 @@
-var timers = {
-  getCPU:false,
-  getCPUTemp:false,
-  getMem:false,
-  getNet:false,
-  getProcesses:false,
-}
 function getCPU(){
   ajax('/pcpu',function(err,data) {
       clearTimeout(timers.getCPU);
@@ -89,6 +82,7 @@ function getCrypto(){
   })
 }
 window.onload = function() {
+    window.timers = {}
     var c = document.getElementById("myCanvas");
     window.ctx = c.getContext("2d")
     var ctxup = document.getElementById("up-chart").getContext("2d");
