@@ -1,3 +1,10 @@
+var timers = {
+  getCPU:false,
+  getCPUTemp:false,
+  getMem:false,
+  getNet:false,
+  getProcesses:false,
+}
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d")
 function drawRing(ctx,centerX,centerY,outerRadius,width,startAngle,endAngle,precentage,bgcolor,bgalpha,color,alpha){
@@ -41,6 +48,8 @@ function ajax(path,cb) {
   xhttp.onreadystatechange = function(){
     if (this.readyState == 4 && this.status == 200) {
       cb(null,this.responseText)
+    }else{
+      cb(true,null)
     }
   }
   xhttp.open("GET", path, true);
@@ -48,6 +57,10 @@ function ajax(path,cb) {
 }
 function getCPU(){
   ajax('/pcpu',function(err,data) {
+      clearTimeout(timers.getCPU);
+      timers.getCPU = setTimeout(getCPU,1000)
+      if(err)
+        return
       cpu = JSON.parse(data)
       //document.getElementById("cpu-data").innerHTML = cpu[0] +' '+cpu[1] +' '+cpu[2] +' '+cpu[3];
       ctx.clearRect(50-55, 50-55, 55*2, 55*2);
@@ -55,41 +68,57 @@ function getCPU(){
       drawRing(ctx,50,50,25+2*7,6,60,360,cpu[1]/100,0,0.5,200,0.5)
       drawRing(ctx,50,50,25+1*7,6,60,360,cpu[2]/100,0,0.5,200,0.5)
       drawRing(ctx,50,50,25+0*7,6,60,360,cpu[3]/100,0,0.5,200,0.5)
-      setTimeout(getCPU,1000)
+      status.getCPU=false;
+      
   })
 }
 function getCPUTemp(){
   ajax('/cputemp',function(err,data) {
+      clearTimeout(timers.getCPUTemp);
+      timers.getCPUTemp = setTimeout(getCPUTemp,1000)
+      if(err)
+        return      
       var cputemp = parseInt(data)
       document.getElementById("cputemp-data").innerHTML = cputemp +'°';
-      setTimeout(getCPUTemp,1000)
+      
   })
 }
 function getMem(){
   ajax('/mem',function(err,data) {
+      clearTimeout(timers.getMem);
+      timers.getMem = setTimeout(getMem,1000)
+      if(err)
+        return
       mem = JSON.parse(data)
       var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
       var total = Math.round((mem.total)/1024/1024/1024*100)/100
       document.getElementById("mem-data").innerHTML =  used+ ' Gb of ' +total +' Gb'
-      setTimeout(getMem,1000)
+      
   })
 }
 function getNet(){
   ajax('/net',function(err,data) {
+      clearTimeout(timers.getNet);
+      timers.getNet = setTimeout(getNet,1000)
+      if(err)
+        return
       net = JSON.parse(data)
       document.getElementById("netup-data").innerHTML = net.tx + 'KB'
       document.getElementById("netdn-data").innerHTML = net.rx + 'KB'
-      setTimeout(getNet,500)
+      
   })
 }
 function getProcesses(){
   ajax('/ps',function(err,data) {
+      clearTimeout(timers.getProcesses);
+      timers.getProcesses = setTimeout(getProcesses,1000)
+      if(err)
+        return
       parser = new DOMParser()
       document.getElementById("ps-tbody").innerHTML = ""
       // table = parser.parseFromString(data, "text/xml").firstChild
       // document.getElementById("ps-data").appendChild(table)
       makeTable(JSON.parse(data),'ps-tbody')
-      setTimeout(getProcesses,1000)
   })
 }
 function updateStats(){

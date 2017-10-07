@@ -70,7 +70,7 @@ app.get('/ps', function (req, res) {
     res.setHeader('Content-Type', 'application/json');
     res.send(str)
   };
-  exec0("ps -Ao pid,%cpu,%mem,comm |sort -nrk 2 | head -n 5 | awk '{gsub(\"(.+/)\",\"\",$4);print \"<\"$4\"<\"\",\"$1\",\"$2\",\"$3\":\"}'",cb);
+  exec0("ps -Ao pid,%cpu,%mem,comm |sort -nrk 2 | head -n 5 | awk '{gsub(\"(.+/)\",\"\",$4);print \"<\"substr($4,1,13)\"<\"\",\"$1\",\"$2\",\"$3\":\"}'",cb);
 })
 
 console.log('running on http://localhost:3000')
