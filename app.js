@@ -98,7 +98,7 @@ io.on('connection', function(socket){
   
 });
 
-console.log('running on http://localhost:3000')
+
 http.listen(3000, function(){
-  console.log('listening on *:3000');
+  console.log('running on http://localhost:3000')
 });
