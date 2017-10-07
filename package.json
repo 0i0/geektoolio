@@ -10,6 +10,8 @@
     "pug": ">=0.0.1",
     "systeminformation": ">=0.0.1",
     "smc": ">=0.0.1",
-    "request": ">=0.0.1"
+    "request": ">=0.0.1",
+    "nowplaying": ">=0.0.1",
+    "socket.io": ">=0.0.1"
   }
 }

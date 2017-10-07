@@ -5,10 +5,11 @@ var exec0         = child_process.exec;
 const si          = require('systeminformation');
 var smc           = require('smc');
 var request       = require('request');
-
+var nowplaying = require("nowplaying");
 var express = require('express')
-
-var app = express()
+var app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'));
 
@@ -87,5 +88,17 @@ app.get('/crypto', function (req, res) {
   });
 })
 
+io.on('connection', function(socket){
+  nowplaying.on("playing", function (data) {
+    socket.broadcast.emit('playing', data);
+  });
+  nowplaying.on("paused", function (data) {
+    socket.broadcast.emit('paused', data);
+  });
+  
+});
+
 console.log('running on http://localhost:3000')
-app.listen(3000);
+http.listen(3000, function(){
+  console.log('listening on *:3000');
+});

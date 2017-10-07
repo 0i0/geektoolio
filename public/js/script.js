@@ -206,6 +206,13 @@ window.onload = function() {
             }
         }
     });
+    var socket = io();
+    socket.on('playing', function(data){
+        document.getElementById("now-playing").innerHTML =  data.artist+ ' - ' + data.name
+     });
+    socket.on('paused', function(data){
+        document.getElementById("now-playing").innerHTML =  ""
+     });
     getCPU()
     getCPUTemp()
     getMem()

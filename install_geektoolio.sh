@@ -7,6 +7,18 @@ if ! location="$(type -p "brew")" || [ -z "brew" ]; then
   	echo "brew is already installed. Proceeding..."
 fi
 
+if ! location="$(type -p "brew")" || [ -z "brew" ]; then
+	echo "installing brew"
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  else
+  	echo "brew is already installed. Proceeding..."
+fi
+
+echo "installing nowplaying dependencies"
+
+sudo gem install bundler
+bundle install
+
 if ! location="$(type -p "node")" || [ -z "node" ]; then
 	echo "installing nodejs"
 	brew install nodejs

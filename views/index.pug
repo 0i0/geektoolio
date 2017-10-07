@@ -7,8 +7,8 @@ html
     script(src="js/lib/maketable.js")
     script(src="js/lib/ring.js")
     script(src="js/lib/chart.min.js")
+    script(src="/socket.io/socket.io.js")
   body
-
     div#cpu.title.h1 CPU
     div#cpu-data.stats
     div#cputemp-data.stats 0
@@ -41,6 +41,7 @@ html
           td.h1(style="width:80px")
           td.h1(style="width:45px")
       tbody#crypto-body
+    div#now-playing.stats
     canvas#myCanvas(width=200 height=130)
     canvas#up-chart.stats(width=100 height=35)
     canvas#dn-chart.stats(width=100 height=35)
