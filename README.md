@@ -1,4 +1,4 @@
-![Screen](https://i.imgur.com/hxY9ge8.png)
+![Screen](https://i.imgur.com/ELN6RAX.png)
 
 
 
@@ -9,14 +9,6 @@
 # Install from shell script
 
 	install_geektool.sh
-
-# Set auto start (if you want)
- 
-	cat com.liorhakim.geektoolio-template.plist | awk -v P="$(pwd)" '{gsub(/pwd/,P,$0); print}' > com.liorhakim.geektoolio.plist
-	sudo cp com.liorhakim.geektoolio.plist /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
-	sudo chown root:wheel /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
-	sudo launchctl load  /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
-	dir=$(pwd);echo "setenv PATH $PATH:$dir"|sudo tee -a /etc/launchd.conf
 
 # Install geekTool
 
@@ -47,6 +39,14 @@ Navigate to geektoolio folder
 # Run the node app
 
 	node app.js
+
+# Set auto start (if you want)
+ 
+	cat com.liorhakim.geektoolio-template.plist | awk -v P="$(pwd)" '{gsub(/pwd/,P,$0); print}' > com.liorhakim.geektoolio.plist
+	sudo cp com.liorhakim.geektoolio.plist /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
+	sudo chown root:wheel /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
+	sudo launchctl load  /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
+	dir=$(pwd);echo "setenv PATH $PATH:$dir"|sudo tee -a /etc/launchd.conf
 
 If you enjoyed please consider tipping me @
 
