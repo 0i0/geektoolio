@@ -1,9 +1,15 @@
 function drawRing(ctx,centerX,centerY,outerRadius,width,startAngle,endAngle,isCounterClockwise,precentage,bgcolor,bgalpha,color,alpha){
   
-  if(endAngle<startAngle)
-    precentAngle = (360+endAngle-startAngle)*precentage + startAngle
+  if(isCounterClockwise)
+    if(endAngle<startAngle)
+      precentAngle = -((-endAngle+startAngle)*precentage - startAngle)
+    else
+      precentAngle = -((360-endAngle+startAngle)*precentage - startAngle)
   else
-    precentAngle = (endAngle-startAngle)*precentage + startAngle
+    if(endAngle<startAngle)
+      precentAngle = (360+endAngle-startAngle)*precentage + startAngle
+    else
+      precentAngle = (endAngle-startAngle)*precentage + startAngle
 
   precentAngle *= 2*Math.PI/360
   endAngle *= 2*Math.PI/360

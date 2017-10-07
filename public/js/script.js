@@ -36,7 +36,7 @@ function getMem(){
       var total = Math.round((mem.total)/1024/1024/1024*100)/100
       document.getElementById("mem-data").innerHTML =  used+ 'G/' +total +'G'
       ctx.clearRect(150-30, 95-30, 30*2, 30*2);
-      drawRing(ctx,150,95,30,12,180,90,false,used/total,0,0.5,200,0.5)
+      drawRing(ctx,150,95,30,12,90,180,true,used/total,0,0.5,200,0.5)
   })
 }
 function getNet(){
