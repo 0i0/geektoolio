@@ -1,10 +1,10 @@
 var child_process = require('child_process');
 var readline      = require('readline');
 var os            = require('os');
-var exec1         = child_process.exec;
 var exec0         = child_process.exec;
-const si = require('systeminformation');
-var smc = require('smc');
+const si          = require('systeminformation');
+var smc           = require('smc');
+var request       = require('request');
 
 var express = require('express')
 
@@ -69,6 +69,19 @@ app.get('/ps', function (req, res) {
     res.send(str)
   };
   exec0("ps -Ao pid,%cpu,%mem,comm |sort -nrk 2 | head -n 5 | awk '{gsub(\"(.+/)\",\"\",$4);print \"<\"substr($4,1,13)\"<\"\",\"$1\",\"$2\",\"$3\":\"}'",cb);
+})
+app.get('/crypto', function (req, res) {
+  request.get('https://api.coinmarketcap.com/v1/ticker/',{},function(err,gres,body){
+    if(err) return
+    if(res.statusCode !== 200 ) return
+    
+    qoutes=JSON.parse(body)
+    qoutes.splice(5,qoutes.length-5)
+    for (var i = 0; i < 5; i++) {
+      qoutes[i] = [qoutes[i].id,qoutes[i].price_usd]
+    }
+    res.send(qoutes)
+  });
 })
 
 console.log('running on http://localhost:3000')

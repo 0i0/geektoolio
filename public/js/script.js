@@ -121,11 +121,22 @@ function getProcesses(){
       makeTable(JSON.parse(data),'ps-tbody')
   })
 }
+function getCrypto(){
+  ajax('/crypto',function(err,data) {
+      clearTimeout(timers.getCrypto);
+      timers.getCrypto = setTimeout(getCrypto,1000)
+      if(err)
+        return
+      document.getElementById("crypto-body").innerHTML = ""
+      makeTable(JSON.parse(data),'crypto-body')
+  })
+}
 function updateStats(){
   getCPU()
   getCPUTemp()
   getMem()
   getNet()
   getProcesses()
+  getCrypto()
 }
 updateStats()
