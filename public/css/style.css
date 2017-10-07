@@ -7,6 +7,8 @@ body{
    /*background-color:#000000;*/
 }
 
+/*table{border:1px solid black;}*/
+
 .title{
 	position: absolute;
 }
@@ -41,18 +43,20 @@ body{
 }
 
 #net{
-	/* float: left; */
 	top: 144px;
 	display: block;
 	width: 200px;
 }
-
+.net-data{
+	text-align: right;
+}
 #ps-data{
 	top: 173px;
 }
 
 .h1{
 	color:#FFFFFF;
+	font-weight: bold;
 }
 
 
