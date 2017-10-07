@@ -4,6 +4,7 @@ var os            = require('os');
 var exec1         = child_process.exec;
 var exec0         = child_process.exec;
 const si = require('systeminformation');
+var smc = require('smc');
 
 var express = require('express')
 
@@ -41,10 +42,7 @@ app.get('/pcpu', function (req, res) {
 
 })
 app.get('/cputemp', function (req, res) {
-  function cb(error, stdout, stderr) {
-    res.send(stdout)
-  };
-  exec1("iStats | grep \"CPU temp\" | awk '{print $3}' | awk -F. '{print $1}'",cb);
+    res.send(smc.get('TC0P').toString())
 })
 app.get('/mem', function (req, res) {
   res.setHeader('Content-Type', 'application/json');

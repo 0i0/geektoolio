@@ -34,10 +34,6 @@ Navigate to geektoolio folder
 
     npm install
 
-# Install iStats (for your cpu tempature)
-	
-    gem install iStats
-
 # Run the node app
 
 	node app.js

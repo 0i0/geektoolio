@@ -13,11 +13,5 @@ if ! location="$(type -p "node")" || [ -z "node" ]; then
 fi
 echo "installing npm dependencies"
 npm install
-if ! location="$(type -p "iStats")" || [ -z "iStats" ]; then
-	echo "installing iStats"
-	gem install iStats
-  else
-  	echo "iStats is already installed. Proceeding..."
-fi
 echo "starting node app..."
 node app.js
