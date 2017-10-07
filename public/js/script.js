@@ -5,60 +5,6 @@ var timers = {
   getNet:false,
   getProcesses:false,
 }
-var c = document.getElementById("myCanvas");
-var ctx = c.getContext("2d")
-function drawRing(ctx,centerX,centerY,outerRadius,width,startAngle,endAngle,isCounterClockwise,precentage,bgcolor,bgalpha,color,alpha){
-  
-  if(endAngle<startAngle)
-    precentAngle = (360+endAngle-startAngle)*precentage + startAngle
-  else
-    precentAngle = (endAngle-startAngle)*precentage + startAngle
-
-  precentAngle *= 2*Math.PI/360
-  endAngle *= 2*Math.PI/360
-  startAngle *= 2*Math.PI/360
-  
-  ctx.beginPath()
-  ctx.arc(centerX,centerY,outerRadius,startAngle,endAngle,isCounterClockwise);
-  ctx.arc(centerX,centerY,outerRadius-width,endAngle,startAngle,!isCounterClockwise);
-  
-  ctx.fillStyle = 'hsla('+bgcolor+',100%,100%,'+bgalpha+')'
-  ctx.fill()   
-  ctx.beginPath()
-  ctx.arc(centerX,centerY,outerRadius,startAngle,precentAngle,isCounterClockwise);
-  ctx.arc(centerX,centerY,outerRadius-width,precentAngle,startAngle,!isCounterClockwise);
-  
-  ctx.fillStyle = 'hsla('+color+',100%,70%,'+alpha+')'
-  ctx.fill()   
-}
-function makeTable(data,id){
-  var dictionaryData = data;
-  var table = document.getElementById(id);
-  for (var i in dictionaryData) {
-    var tr = document.createElement("tr");
-    
-    for (var j in dictionaryData[i]) {
-      var txt = document.createTextNode(dictionaryData[i][j]);
-      var td = document.createElement("td");
-      td.appendChild(txt);
-      tr.appendChild(td);
-    }
-    table.appendChild(tr);
-  } 
-}
-
-function ajax(path,cb) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200) {
-      cb(null,this.responseText)
-    }else{
-      cb(true,null)
-    }
-  }
-  xhttp.open("GET", path, true);
-  xhttp.send();
-}
 function getCPU(){
   ajax('/pcpu',function(err,data) {
       clearTimeout(timers.getCPU);
@@ -66,7 +12,6 @@ function getCPU(){
       if(err)
         return
       cpu = JSON.parse(data)
-      //document.getElementById("cpu-data").innerHTML = cpu[0] +' '+cpu[1] +' '+cpu[2] +' '+cpu[3];
       ctx.clearRect(50-55, 50-55, 55*2, 55*2);
       drawRing(ctx,50,50,25+3*7,6,60,360,false,cpu[0]/100,0,0.5,200,0.5)
       drawRing(ctx,50,50,25+2*7,6,60,360,false,cpu[1]/100,0,0.5,200,0.5)
@@ -130,8 +75,6 @@ function getProcesses(){
         return
       parser = new DOMParser()
       document.getElementById("ps-tbody").innerHTML = ""
-      // table = parser.parseFromString(data, "text/xml").firstChild
-      // document.getElementById("ps-data").appendChild(table)
       makeTable(JSON.parse(data),'ps-tbody')
   })
 }
@@ -146,6 +89,8 @@ function getCrypto(){
   })
 }
 window.onload = function() {
+    var c = document.getElementById("myCanvas");
+    window.ctx = c.getContext("2d")
     var ctxup = document.getElementById("up-chart").getContext("2d");
     var ctxdn = document.getElementById("dn-chart").getContext("2d");
     window.upChartData = {
