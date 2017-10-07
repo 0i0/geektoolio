@@ -10,6 +10,13 @@
 
 	install_geektool.sh
 
+# Set auto start (if you want) 
+	cat com.liorhakim.geektoolio-template.plist | awk -v P="$(pwd)" '{gsub(/pwd/,P,$0); print}' > com.liorhakim.geektoolio.plist
+	sudo cp com.liorhakim.geektoolio.plist /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
+	sudo chown root:wheel /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
+	sudo launchctl load  /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
+	dir=$(pwd);echo "setenv PATH $PATH:$dir"|sudo tee -a /etc/launchd.conf
+
 # Install geekTool
 
 Download GeekTool from https://www.tynsoe.org/v2/geektool/
@@ -17,6 +24,8 @@ Download GeekTool from https://www.tynsoe.org/v2/geektool/
 # Open the geeklet
 
 geektoolio.glet
+
+
 
 # Or install by yourself
 

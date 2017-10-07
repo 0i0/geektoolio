@@ -7,7 +7,7 @@
     <key>ProgramArguments</key>
     <array>
         <string>/usr/local/bin/node</string>
-        <string>/Users/leo/GoogleDrive/src/geektoolio/app.js</string>
+        <string>pwd/app.js</string>
     </array>
     <key>RunAtLoad</key>
   	<true/>
