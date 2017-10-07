@@ -17,8 +17,9 @@ body{
 }
 
 #cpu{
-    top: 47px;
-    left: 42px;
+    top: 38px;
+    left: 75px;
+    font-size: 26px;
 }
 
 #cpu-data{
@@ -27,14 +28,15 @@ body{
 }
 
 #cputemp-data{
-    top: 58px;
-    left: 71px;
-	font-size: 25px;
+    top: 43px;
+    left: 41px;
+    font-size: 14px;
 }
 
 #mem{
-	top: 91px;
-	left: 140px;
+	top: 89px;
+	left: 137px;
+	font-size: 14px;
 }
 
 #mem-data{
