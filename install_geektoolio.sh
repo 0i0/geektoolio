@@ -7,16 +7,16 @@ if ! location="$(type -p "brew")" || [ -z "brew" ]; then
   	echo "brew is already installed. Proceeding..."
 fi
 
-if ! location="$(type -p "brew")" || [ -z "brew" ]; then
-	echo "installing brew"
-	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  else
-  	echo "brew is already installed. Proceeding..."
-fi
-
 echo "installing nowplaying dependencies"
 
-sudo gem install bundler
+if !exist="$(gem list bundler -i)" ;then
+	echo "installing bundler "
+	sudo gem install bundler
+  else
+  	echo "bundler is already installed. Proceeding..."
+fi
+
+echo "installing gem dependencies..."
 bundle install
 
 if ! location="$(type -p "node")" || [ -z "node" ]; then
@@ -40,7 +40,8 @@ while true; do
 				sudo launchctl load  /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
 				dir=$(pwd);echo "setenv PATH $PATH:$dir"|sudo tee -a /etc/launchd.conf
 				break;;
-        [Nn]* ) exit;;
+        [Nn]* ) echo "bailing on autostart and proceeding..."
+				break;;
         * ) echo "Please answer yes or no.";;
     esac
 done
