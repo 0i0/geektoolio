@@ -9,7 +9,7 @@ fi
 
 echo "installing nowplaying dependencies"
 
-if !exist="$(gem list bundler -i)" ;then
+if ! exist="$(gem list bundler -i)" ;then
 	echo "installing bundler "
 	sudo gem install bundler
   else
