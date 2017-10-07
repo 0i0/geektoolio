@@ -16,7 +16,10 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'pug')
 
 app.get('/',function(req,res){
-	res.render('index');
+  res.render('index');
+})
+app.get('/test',function(req,res){
+  res.render('test');
 })
 app.get('/pcpu', function (req, res) {
   var cpus_start = os.cpus();

@@ -3,6 +3,7 @@ html
     title title
     link(rel="stylesheet" href="css/reset.css")
     link(rel="stylesheet" href="css/style.css")
+    script(src="js/lib/chart.min.js")
   body
 
     div#cpu.title.h1 CPU
@@ -13,13 +14,16 @@ html
       span#memusage-data 0 
       span of 
       span#memtotal-data 0
-    table#net.stats(style="width:95px")
+    table#net.stats(style="width:190px")
       tr
+        td(style="width:100px")
         td.h1(style="width:40px") Up 
-        td#netup-data.net-data(style="width:55px")
+        td#netup-data.net-data(style="width:50px")
       tr
+        td(style="width:100px")
         td.h1(style="width:40px") Down 
-        td#netdn-data.net-data(style="width:55px")
+        td#netdn-data.net-data(style="width:50px")
+        
     table#ps-data.stats
       thead
         tr
@@ -34,5 +38,7 @@ html
           td.h1(style="width:80px")
           td.h1(style="width:45px")
       tbody#crypto-body
-    canvas#myCanvas(width=200 height=200)
+    canvas#myCanvas(width=200 height=130)
+    canvas#up-chart.stats(width=100 height=35)
+    canvas#dn-chart.stats(width=100 height=35)
     script(src="js/script.js")
