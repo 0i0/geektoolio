@@ -34,7 +34,7 @@ function getMem(){
       mem = JSON.parse(data)
       var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
       var total = Math.round((mem.total)/1024/1024/1024*100)/100
-      document.getElementById("mem-data").innerHTML =  used+ ' Gb of ' +total +' Gb'
+      document.getElementById("mem-data").innerHTML =  used+ 'G/' +total +'G'
       ctx.clearRect(150-30, 95-30, 30*2, 30*2);
       drawRing(ctx,150,95,30,12,180,90,false,used/total,0,0.5,200,0.5)
   })
@@ -134,7 +134,6 @@ window.onload = function() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
                             return '';
                         }
@@ -146,7 +145,6 @@ window.onload = function() {
                 }],
                 xAxes: [{
                     ticks: {
-                        // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
                             return '';
                         }
@@ -185,7 +183,6 @@ window.onload = function() {
             scales: {
                 yAxes: [{
                     ticks: {
-                        // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
                             return '';
                         }
@@ -197,7 +194,6 @@ window.onload = function() {
                 }],
                 xAxes: [{
                     ticks: {
-                        // Include a dollar sign in the ticks
                         callback: function(value, index, values) {
                             return '';
                         }

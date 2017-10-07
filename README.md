@@ -10,7 +10,8 @@
 
 	install_geektool.sh
 
-# Set auto start (if you want) 
+# Set auto start (if you want)
+ 
 	cat com.liorhakim.geektoolio-template.plist | awk -v P="$(pwd)" '{gsub(/pwd/,P,$0); print}' > com.liorhakim.geektoolio.plist
 	sudo cp com.liorhakim.geektoolio.plist /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
 	sudo chown root:wheel /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
