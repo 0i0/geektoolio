@@ -8,7 +8,7 @@
 
 # Install from shell script
 
-	install_geektool.sh
+	install_geektoolio.sh
 
 # Install geekTool
 
