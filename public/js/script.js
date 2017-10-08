@@ -16,16 +16,17 @@ define(function (require) {
       }
       status.getCPU=false
     })
+    clearTimeout(window.timers.getCPU)
   }
   function getCPUTemp(){
-    ajax('/cputemp?_=' + new Date().getTime(),function(err,data) {
+    ajax('/cputemp?_=' + new Date().getTime(),function(err,data) { 
       clearTimeout(window.timers.getCPUTemp)
       window.timers.getCPUTemp = setTimeout(getCPUTemp,window.refreshRate)
       if(err)return      
       var cputemp = parseInt(data)
-      document.getElementById('cputemp-data').innerHTML = cputemp +'°'
-        
+      document.getElementById('cputemp-data').innerHTML = cputemp +'°'  
     })
+    clearTimeout(window.timers.getCPUTemp)
   }
   function getMem(){
     ajax('/mem?_=' + new Date().getTime(),function(err,data) {
@@ -40,6 +41,7 @@ define(function (require) {
       window.ctx.clearRect(150-30, 95-30, 30*2, 30*2)
       drawRing(window.ctx,150,95,30,12,90,180,true,used/total,0,0.5,200,0.5)
     })
+    clearTimeout(window.timers.getMem)
   }
   function getNet(){
     ajax('/net?_=' + new Date().getTime(),function(err,data) {
@@ -61,26 +63,27 @@ define(function (require) {
         window.dnBar.update()
       }
     })
+    clearTimeout(window.timers.getNet)
   }
   function getProcesses(){
     ajax('/ps?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getProcesses)
       window.timers.getProcesses = setTimeout(getProcesses,window.refreshRate)
-      if(err)
-        return
+      if(err) return
       document.getElementById('ps-tbody').innerHTML = ''
       makeTable(JSON.parse(data),'ps-tbody')
     })
+    clearTimeout(window.timers.getProcesses)
   }
   function getCrypto(){
     ajax('/crypto?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCrypto)
       window.timers.getCrypto = setTimeout(getCrypto,window.refreshRate)
-      if(err)
-        return
+      if(err) return
       document.getElementById('crypto-body').innerHTML = ''
       makeTable(JSON.parse(data),'crypto-body')
     })
+    clearTimeout(window.timers.getCrypto)
   }
   
   window.timers = {}
@@ -208,6 +211,7 @@ define(function (require) {
   socket.on('paused', function(){
     document.getElementById('now-playing').innerHTML =  ''
   })
+  window.timers = {getCrypto:[]}
   window.refreshRate = 2000
   getCPU()
   getCPUTemp()

@@ -1,6 +1,7 @@
 define(function (require) {
   return function ajax(path,cb) {
     var xhttp = new XMLHttpRequest()
+    xhttp.timeout = 5000
     xhttp.onreadystatechange = function(){
       if (this.readyState == 4 && this.status == 200) {
         cb(null,this.responseText)
