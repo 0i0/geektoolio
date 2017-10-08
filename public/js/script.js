@@ -68,7 +68,6 @@ define(function (require) {
       window.timers.getProcesses = setTimeout(getProcesses,window.refreshRate)
       if(err)
         return
-      var parser = new DOMParser()
       document.getElementById('ps-tbody').innerHTML = ''
       makeTable(JSON.parse(data),'ps-tbody')
     })
