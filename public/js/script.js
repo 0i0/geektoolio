@@ -1,23 +1,21 @@
 define(function (require) {
-    var drawRing = require('lib/ring')
-      , ajax = require('lib/ajax')
-      , makeTable = require('lib/makeTable')
-    //Define this module as exporting a function
+  var drawRing = require('lib/ring')
+    , ajax = require('lib/ajax')
+    , makeTable = require('lib/makeTable')
 
   function getCPU(){
     ajax('/pcpu',function(err,data) {
-        clearTimeout(window.timers.getCPU)
-        window.timers.getCPU = setTimeout(getCPU,1000)
-        if(err)
-          return
-        cpu = JSON.parse(data)
-        ctx.clearRect(50-55, 50-55, 55*2, 55*2);
-        drawRing(ctx,50,50,25+3*7,6,30,330,false,cpu[0]/100,0,0.5,200,0.5)
-        drawRing(ctx,50,50,25+2*7,6,30,330,false,cpu[1]/100,0,0.5,200,0.5)
-        drawRing(ctx,50,50,25+1*7,6,30,330,false,cpu[2]/100,0,0.5,200,0.5)
-        drawRing(ctx,50,50,25+0*7,6,30,330,false,cpu[3]/100,0,0.5,200,0.5)
-        status.getCPU=false;
-        
+      clearTimeout(window.timers.getCPU)
+      window.timers.getCPU = setTimeout(getCPU,1000)
+      if(err)
+        return
+      var cpu = JSON.parse(data)
+      window.ctx.clearRect(50-55, 50-55, 55*2, 55*2)
+      drawRing(window.ctx,50,50,25+3*7,6,30,330,false,cpu[0]/100,0,0.5,200,0.5)
+      drawRing(window.ctx,50,50,25+2*7,6,30,330,false,cpu[1]/100,0,0.5,200,0.5)
+      drawRing(window.ctx,50,50,25+1*7,6,30,330,false,cpu[2]/100,0,0.5,200,0.5)
+      drawRing(window.ctx,50,50,25+0*7,6,30,330,false,cpu[3]/100,0,0.5,200,0.5)
+      status.getCPU=false
     })
   }
   function getCPUTemp(){
@@ -26,202 +24,196 @@ define(function (require) {
       window.timers.getCPUTemp = setTimeout(getCPUTemp,1000)
       if(err)return      
       var cputemp = parseInt(data)
-      document.getElementById("cputemp-data").innerHTML = cputemp +'°'
+      document.getElementById('cputemp-data').innerHTML = cputemp +'°'
         
     })
   }
   function getMem(){
     ajax('/mem',function(err,data) {
-        clearTimeout(window.timers.getMem)
-        window.timers.getMem = setTimeout(getMem,1000)
-        if(err)
-          return
-        mem = JSON.parse(data)
-        var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
-        var total = Math.round((mem.total)/1024/1024/1024*100)/100
-        document.getElementById("mem-data").innerHTML =  used+ 'G/' +total +'G'
-        ctx.clearRect(150-30, 95-30, 30*2, 30*2)
-        drawRing(ctx,150,95,30,12,90,180,true,used/total,0,0.5,200,0.5)
+      clearTimeout(window.timers.getMem)
+      window.timers.getMem = setTimeout(getMem,1000)
+      if(err)
+        return
+      var mem = JSON.parse(data)
+      var used = Math.round((mem.total-mem.free)/1024/1024/1024*100)/100
+      var total = Math.round((mem.total)/1024/1024/1024*100)/100
+      document.getElementById('mem-data').innerHTML =  used+ 'G/' +total +'G'
+      window.ctx.clearRect(150-30, 95-30, 30*2, 30*2)
+      drawRing(window.ctx,150,95,30,12,90,180,true,used/total,0,0.5,200,0.5)
     })
   }
   function getNet(){
     ajax('/net',function(err,data) {
-        clearTimeout(timers.getNet)
-        timers.getNet = setTimeout(getNet,1000)
-        if(err)
-          return
-        net = JSON.parse(data)
-        document.getElementById("netup-data").innerHTML = net.tx + 'KB'
-        document.getElementById("netdn-data").innerHTML = net.rx + 'KB'
-        if (upChartData.datasets.length > 0) {
-              upChartData.datasets[0].data.push(net.tx)
-              upChartData.datasets[0].data.splice(0,1)
-              window.upBar.update();
-          }
-        if (dnChartData.datasets.length > 0) {
-              dnChartData.datasets[0].data.push(-net.rx)
-              dnChartData.datasets[0].data.splice(0,1)
-              window.dnBar.update();
-          }
+      clearTimeout(window.timers.getNet)
+      window.timers.getNet = setTimeout(getNet,1000)
+      if(err)
+        return
+      var net = JSON.parse(data)
+      document.getElementById('netup-data').innerHTML = net.tx + 'KB'
+      document.getElementById('netdn-data').innerHTML = net.rx + 'KB'
+      if (window.upChartData.datasets.length > 0) {
+        window.upChartData.datasets[0].data.push(net.tx)
+        window.upChartData.datasets[0].data.splice(0,1)
+        window.upBar.update()
+      }
+      if (window.dnChartData.datasets.length > 0) {
+        window.dnChartData.datasets[0].data.push(-net.rx)
+        window.dnChartData.datasets[0].data.splice(0,1)
+        window.dnBar.update()
+      }
     })
   }
   function getProcesses(){
     ajax('/ps',function(err,data) {
-        clearTimeout(timers.getProcesses)
-        timers.getProcesses = setTimeout(getProcesses,1000)
-        if(err)
-          return
-        parser = new DOMParser()
-        document.getElementById("ps-tbody").innerHTML = ""
-        makeTable(JSON.parse(data),'ps-tbody')
+      clearTimeout(window.timers.getProcesses)
+      window.timers.getProcesses = setTimeout(getProcesses,1000)
+      if(err)
+        return
+      var parser = new DOMParser()
+      document.getElementById('ps-tbody').innerHTML = ''
+      makeTable(JSON.parse(data),'ps-tbody')
     })
   }
   function getCrypto(){
     ajax('/crypto',function(err,data) {
-        clearTimeout(timers.getCrypto)
-        timers.getCrypto = setTimeout(getCrypto,1000)
-        if(err)
-          return
-        document.getElementById("crypto-body").innerHTML = ""
-        makeTable(JSON.parse(data),'crypto-body')
+      clearTimeout(window.timers.getCrypto)
+      window.timers.getCrypto = setTimeout(getCrypto,1000)
+      if(err)
+        return
+      document.getElementById('crypto-body').innerHTML = ''
+      makeTable(JSON.parse(data),'crypto-body')
     })
   }
   
-      window.timers = {}
-      var c = document.getElementById("myCanvas")
-      window.ctx = c.getContext("2d")
-      var ctxup = document.getElementById("up-chart").getContext("2d")
-      var ctxdn = document.getElementById("dn-chart").getContext("2d")
-      window.upChartData = {
-          labels: ["", "", "", "", "", "", "", "", "", "",
-                   "", "", "", "", "", "", "", "", "", ""
-                  ],
-          datasets: [{
-              backgroundColor: '#ccc',
-              borderWidth: 0,
-              data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-          }]
+  window.timers = {}
+  var c = document.getElementById('myCanvas')
+  window.ctx = c.getContext('2d')
+  var ctxup = document.getElementById('up-chart').getContext('2d')
+  var ctxdn = document.getElementById('dn-chart').getContext('2d')
+  window.upChartData = {
+    labels: ['', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', ''],
+    datasets: [{
+      backgroundColor: '#ccc',
+      borderWidth: 0,
+      data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    }]
 
-      };
-      window.dnChartData = {
-          labels: ["", "", "", "", "", "", "", "", "", "",
-                   "", "", "", "", "", "", "", "", "", ""
-                  ],
-          datasets: [{
-              backgroundColor: '#ccc',
-              borderWidth: 0,
-              data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-          }]
-
-      };
-      window.upBar = new Chart(ctxup, {
-          type: 'bar',
-          data: upChartData,
-          options: {
-              responsive: false,
-              maintainAspectRatio: false,
-              title: {
-                  display: false,
-              },
-              legend: {
-                  display: false,
-              },
-              animation : false,
-              layout: {
-                  padding: {
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      bottom: 0
-                  }
-              },
-              tooltips: {enabled:false},
-              scales: {
-                  yAxes: [{
-                      ticks: {
-                          callback: function(value, index, values) {
-                              return '';
-                          }
-                      },
-                      gridLines : {
-                        drawBorder: false,
-                        display : false
-                      }
-                  }],
-                  xAxes: [{
-                      ticks: {
-                          callback: function(value, index, values) {
-                              return '';
-                          }
-                      },
-                      gridLines : {
-                        drawBorder: false,
-                        display : false
-                      }
-                  }]
-
-              }
+  }
+  window.dnChartData = {
+    labels: ['', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', ''],
+    datasets: [{
+      backgroundColor: '#ccc',
+      borderWidth: 0,
+      data: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+    }]
+  }
+  window.upBar = new window.Chart(ctxup, {
+    type: 'bar',
+    data: window.upChartData,
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
+      },
+      animation : false,
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        }
+      },
+      tooltips: {enabled:false},
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback: function() {
+              return ''
+            }
+          },
+          gridLines : {
+            drawBorder: false,
+            display : false
           }
-      });
-      window.dnBar = new Chart(ctxdn, {
-          type: 'bar',
-          data: dnChartData,
-          options: {
-              responsive: false,
-              maintainAspectRatio: false,
-              title: {
-                  display: false,
-              },
-              legend: {
-                  display: false,
-              },
-              animation : false,
-              layout: {
-                  padding: {
-                      left: 0,
-                      right: 0,
-                      top: 0,
-                      bottom: 0
-                  }
-              },
-              tooltips: {enabled:false},
-              scales: {
-                  yAxes: [{
-                      ticks: {
-                          callback: function(value, index, values) {
-                              return '';
-                          }
-                      },
-                      gridLines : {
-                        drawBorder: false,
-                        display : false
-                      }
-                  }],
-                  xAxes: [{
-                      ticks: {
-                          callback: function(value, index, values) {
-                              return '';
-                          }
-                      },
-                      gridLines : {
-                        drawBorder: false,
-                        display : false
-                      }
-                  }]
-              }
+        }],
+        xAxes: [{
+          ticks: {
+            callback: function() {
+              return ''
+            }
+          },
+          gridLines : {
+            drawBorder: false,
+            display : false
           }
-      });
-      var socket = io();
-      socket.on('playing', function(data){
-          document.getElementById("now-playing").innerHTML =  data.artist+ ' - ' + data.name
-       });
-      socket.on('paused', function(data){
-          document.getElementById("now-playing").innerHTML =  ""
-       });
-      getCPU()
-      getCPUTemp()
-      getMem()
-      getNet()
-      getProcesses()
-      getCrypto()
-});
+        }]
+      }
+    }
+  })
+  window.dnBar = new window.Chart(ctxdn, {
+    type: 'bar',
+    data: window.dnChartData,
+    options: {
+      responsive: false,
+      maintainAspectRatio: false,
+      title: {
+        display: false,
+      },
+      legend: {
+        display: false,
+      },
+      animation : false,
+      layout: {
+        padding: {
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0
+        }
+      },
+      tooltips: {enabled:false},
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback: function() {
+              return ''
+            }
+          },
+          gridLines : {
+            drawBorder: false,
+            display : false
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            callback: function() {
+              return ''
+            }
+          },
+          gridLines : {
+            drawBorder: false,
+            display : false
+          }
+        }]
+      }
+    }
+  })
+  var socket = window.io()
+  socket.on('playing', function(data){
+    document.getElementById('now-playing').innerHTML =  data.artist+ ' - ' + data.name
+  })
+  socket.on('paused', function(){
+    document.getElementById('now-playing').innerHTML =  ''
+  })
+  getCPU()
+  getCPUTemp()
+  getMem()
+  getNet()
+  getProcesses()
+  getCrypto()
+})
