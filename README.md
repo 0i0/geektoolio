@@ -1,6 +1,6 @@
 ![Screen](https://i.imgur.com/XROoRU4.png)
 
-
+![travis-ci](https://api.travis-ci.org/0i0/geektoolio.svg?branch=master)
 
 # Clone git Repo
 
