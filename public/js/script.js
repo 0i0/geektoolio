@@ -6,7 +6,7 @@ define(function (require) {
   function getCPU(){
     ajax('/pcpu?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCPU)
-      window.timers.getCPU = setTimeout(getCPU,window.refreshrate)
+      window.timers.getCPU = setTimeout(getCPU,window.refreshRate)
       if(err)
         return
       var cpu = JSON.parse(data)
@@ -20,7 +20,7 @@ define(function (require) {
   function getCPUTemp(){
     ajax('/cputemp?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCPUTemp)
-      window.timers.getCPUTemp = setTimeout(getCPUTemp,window.refreshrate)
+      window.timers.getCPUTemp = setTimeout(getCPUTemp,window.refreshRate)
       if(err)return      
       var cputemp = parseInt(data)
       document.getElementById('cputemp-data').innerHTML = cputemp +'°'
@@ -30,7 +30,7 @@ define(function (require) {
   function getMem(){
     ajax('/mem?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getMem)
-      window.timers.getMem = setTimeout(getMem,window.refreshrate)
+      window.timers.getMem = setTimeout(getMem,window.refreshRate)
       if(err)
         return
       var mem = JSON.parse(data)
@@ -44,7 +44,7 @@ define(function (require) {
   function getNet(){
     ajax('/net?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getNet)
-      window.timers.getNet = setTimeout(getNet,window.refreshrate)
+      window.timers.getNet = setTimeout(getNet,window.refreshRate)
       if(err)
         return
       var net = JSON.parse(data)
@@ -65,7 +65,7 @@ define(function (require) {
   function getProcesses(){
     ajax('/ps?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getProcesses)
-      window.timers.getProcesses = setTimeout(getProcesses,window.refreshrate)
+      window.timers.getProcesses = setTimeout(getProcesses,window.refreshRate)
       if(err)
         return
       var parser = new DOMParser()
@@ -76,7 +76,7 @@ define(function (require) {
   function getCrypto(){
     ajax('/crypto?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCrypto)
-      window.timers.getCrypto = setTimeout(getCrypto,window.refreshrate)
+      window.timers.getCrypto = setTimeout(getCrypto,window.refreshRate)
       if(err)
         return
       document.getElementById('crypto-body').innerHTML = ''
@@ -209,7 +209,7 @@ define(function (require) {
   socket.on('paused', function(){
     document.getElementById('now-playing').innerHTML =  ''
   })
-  window.refreshrate = 2000
+  window.refreshRate = 2000
   getCPU()
   getCPUTemp()
   getMem()
