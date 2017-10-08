@@ -13,8 +13,8 @@
     <key>RunAtLoad</key>
   	<true/>
     <key>StandardErrorPath</key>
-	<string>/tmp/mycommand.err</string>
+	<string>/tmp/geektoolio.err</string>
 	<key>StandardOutPath</key>
-	<string>/tmp/mycommand.out</string>
+	<string>/tmp/geektoolio.out</string>
 </dict>
 </plist>
