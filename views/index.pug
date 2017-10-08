@@ -3,10 +3,7 @@ html
     title geektoolio
     link(rel="stylesheet" href="css/reset.css")
     link(rel="stylesheet" href="css/style.css")
-    script(src="js/lib/ajax.js")
-    script(src="js/lib/maketable.js")
-    script(src="js/lib/ring.js")
-    script(src="js/lib/chart.min.js")
+    script(src="/js/lib/Chart.min.js")
     script(src="/socket.io/socket.io.js")
   body
     div#cpu.title.h1 CPU
@@ -45,4 +42,4 @@ html
     canvas#myCanvas(width=200 height=130)
     canvas#up-chart.stats(width=100 height=35)
     canvas#dn-chart.stats(width=100 height=35)
-    script(src="js/script.js")
+    script(data-main="js/script" src="js/lib/require.js")

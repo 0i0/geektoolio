@@ -19,5 +19,8 @@
     "request": ">=0.0.1",
     "nowplaying": ">=0.0.1",
     "socket.io": ">=0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0"
   }
 }
