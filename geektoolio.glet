@@ -5,7 +5,7 @@
 	<key>DisplayID</key>
 	<integer>69677248</integer>
 	<key>GeekletFrame</key>
-	<string>{{91.234375, 18.1640625}, {313, 389}}</string>
+	<string>{{0, 0}, {313, 389}}</string>
 	<key>HasShadow</key>
 	<false/>
 	<key>Identifier</key>
