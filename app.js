@@ -106,6 +106,6 @@ io.on('connection', function(socket){
 })
 
 
-http.listen(3000, function(){
-  console.log('running on http://localhost:3000')
+http.listen(26497, function(){
+  console.log('running on http://localhost:26497')
 })
