@@ -11,10 +11,9 @@ define(function (require) {
         return
       var cpu = JSON.parse(data)
       window.ctx.clearRect(50-55, 50-55, 55*2, 55*2)
-      drawRing(window.ctx,50,50,25+3*7,6,30,330,false,cpu[0]/100,0,0.5,200,0.5)
-      drawRing(window.ctx,50,50,25+2*7,6,30,330,false,cpu[1]/100,0,0.5,200,0.5)
-      drawRing(window.ctx,50,50,25+1*7,6,30,330,false,cpu[2]/100,0,0.5,200,0.5)
-      drawRing(window.ctx,50,50,25+0*7,6,30,330,false,cpu[3]/100,0,0.5,200,0.5)
+      for (var i = cpu.length - 1; i >= 0; i--) {
+        drawRing(window.ctx,50,50,25+i*7,6,30,330,false,cpu[i]/100,0,0.5,200,0.5)
+      }
       status.getCPU=false
     })
   }
