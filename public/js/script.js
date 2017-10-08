@@ -4,7 +4,7 @@ define(function (require) {
     , makeTable = require('lib/makeTable')
 
   function getCPU(){
-    ajax('/pcpu',function(err,data) {
+    ajax('/pcpu?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCPU)
       window.timers.getCPU = setTimeout(getCPU,1000)
       if(err)
@@ -18,7 +18,7 @@ define(function (require) {
     })
   }
   function getCPUTemp(){
-    ajax('/cputemp',function(err,data) {
+    ajax('/cputemp?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCPUTemp)
       window.timers.getCPUTemp = setTimeout(getCPUTemp,1000)
       if(err)return      
@@ -28,7 +28,7 @@ define(function (require) {
     })
   }
   function getMem(){
-    ajax('/mem',function(err,data) {
+    ajax('/mem?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getMem)
       window.timers.getMem = setTimeout(getMem,1000)
       if(err)
@@ -42,7 +42,7 @@ define(function (require) {
     })
   }
   function getNet(){
-    ajax('/net',function(err,data) {
+    ajax('/net?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getNet)
       window.timers.getNet = setTimeout(getNet,1000)
       if(err)
@@ -63,7 +63,7 @@ define(function (require) {
     })
   }
   function getProcesses(){
-    ajax('/ps',function(err,data) {
+    ajax('/ps?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getProcesses)
       window.timers.getProcesses = setTimeout(getProcesses,1000)
       if(err)
@@ -74,7 +74,7 @@ define(function (require) {
     })
   }
   function getCrypto(){
-    ajax('/crypto',function(err,data) {
+    ajax('/crypto?_=' + new Date().getTime(),function(err,data) {
       clearTimeout(window.timers.getCrypto)
       window.timers.getCrypto = setTimeout(getCrypto,1000)
       if(err)
