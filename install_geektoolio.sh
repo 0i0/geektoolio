@@ -45,9 +45,9 @@ while true; do
       sudo chown root:wheel /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
       sudo launchctl load  /Library/LaunchDaemons/com.liorhakim.geektoolio.plist
       echo "setenv PATH $PATH:$dir" | sudo tee -a /etc/launchd.conf
-      ;;
+      break;;
     [Nn]*) echo "bailing on autostart and proceeding..."
-      ;;
+      break;;
     *) echo "Please answer yes or no.";;
   esac
 done
