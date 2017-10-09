@@ -1,14 +1,14 @@
 ![Screen](https://i.imgur.com/XROoRU4.png)
 
-![travis-ci](https://api.travis-ci.org/0i0/geektoolio.svg?branch=master)
+![travis-ci](https://api.travis-ci.org/0i0/nonky.svg?branch=master)
 
 # Clone git Repo
 
-    git clone https://github.com/0i0/geektoolio.git && cd geektoolio
+    git clone https://github.com/0i0/nonky.git && cd nonky
 
 # Install from shell script
 
-	install_geektoolio.sh
+	install_nonky.sh
 
 # Install geekTool
 
@@ -16,7 +16,7 @@ Download GeekTool from https://www.tynsoe.org/v2/geektool/
 
 # Open the geeklet file from the root of the project
 
-geektoolio.glet
+nonky.glet
 
 # Tipping
 
